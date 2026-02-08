@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Subcategories{% endblock %}
+
+{% block content %}
+<h2 class="text-center mb-4">{{ category.name }}</h2>
+
+<div class="row">
+    {% for sub in subcategories %}
+    <div class="col-md-4">
+        <div class="card shadow text-center p-3 mb-4">
+            <h5>{{ sub.name }}</h5>
+            <a href="/quiz-settings/{{ sub.id }}/"
+               class="btn btn-success mt-3">
+                Start Quiz
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="text-center mt-3">
+    <a href="/categories/" class="btn btn-secondary">← Back</a>
+</div>
+{% endblock %}

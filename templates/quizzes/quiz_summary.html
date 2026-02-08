@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Quiz Summary{% endblock %}
+
+{% block content %}
+<h2>Quiz Configuration Summary</h2>
+
+<ul>
+    <li>Subcategory ID: {{ subcategory_id }}</li>
+    <li>Difficulty: {{ difficulty }}</li>
+    <li>Questions: {{ question_count }}</li>
+    <li>Timer: {{ timer }}</li>
+</ul>
+
+<p>This data is stored in session and will be used to generate quiz questions.</p>
+{% endblock %}
