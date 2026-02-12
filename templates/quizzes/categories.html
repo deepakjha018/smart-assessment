@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}Categories{% endblock %}
-
 {% block content %}
-<h2 class="text-center mb-4">Choose a Category</h2>
+<h2 class="text-center mb-5">Choose Your Domain</h2>
 
 <div class="row">
     {% for category in categories %}
     <div class="col-md-4">
-        <div class="card shadow text-center p-4 mb-4">
-            <h4>{{ category.name }}</h4>
+        <div class="card p-4 text-center mb-4">
+            <h3>{{ category.name }}</h3>
+            <p class="text-light">{{ category.description }}</p>
+
             <a href="/categories/{{ category.id }}/"
-               class="btn btn-outline-primary mt-3">
-                View Subcategories
+               class="btn btn-primary mt-3">
+               Explore →
             </a>
         </div>
     </div>

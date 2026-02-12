@@ -44,12 +44,23 @@ def logout_user(request):
 
 @login_required
 def profile(request):
-    profile = request.user.userprofile
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
+        # Update Django User model fields
+        request.user.first_name = request.POST.get('first_name')
+        request.user.last_name = request.POST.get('last_name')
+        request.user.email = request.POST.get('email')
+        request.user.save()
+
+        # Update Profile model fields
         profile.bio = request.POST.get('bio')
+        profile.education_level = request.POST.get('education_level')
+        profile.preferred_category = request.POST.get('preferred_category')
+
         if 'profile_pic' in request.FILES:
             profile.profile_pic = request.FILES['profile_pic']
+
         profile.save()
 
     return render(request, 'users/profile.html', {'profile': profile})
