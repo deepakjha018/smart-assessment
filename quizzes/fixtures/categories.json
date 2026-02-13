@@ -1,0 +1,83 @@
+[
+  {
+    "model": "quizzes.category",
+    "pk": 1,
+    "fields": {
+      "name": "Academic",
+      "description": "Educational and subject-based quizzes"
+    }
+  },
+  {
+    "model": "quizzes.category",
+    "pk": 2,
+    "fields": {
+      "name": "Entertainment",
+      "description": "Fun and entertainment quizzes"
+    }
+  },
+  {
+    "model": "quizzes.category",
+    "pk": 3,
+    "fields": {
+      "name": "General Knowledge",
+      "description": "General awareness quizzes"
+    }
+  },
+
+  {
+    "model": "quizzes.subcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Physics",
+      "category": 1
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Mathematics",
+      "category": 1
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Chemistry",
+      "category": 1
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Movies",
+      "category": 2
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Music",
+      "category": 2
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 6,
+    "fields": {
+      "name": "History",
+      "category": 3
+    }
+  },
+  {
+    "model": "quizzes.subcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Geography",
+      "category": 3
+    }
+  }
+]

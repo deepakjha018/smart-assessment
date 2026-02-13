@@ -3,42 +3,58 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: radial-gradient(circle at top left, #0f2027, #203a43, #2c5364);
     min-height: 100vh;
 }
 
+
 /* Glass Card */
 .card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
-    color: white;
-    transition: 0.4s ease;
+    background: linear-gradient(145deg, #16222a, #0f2027);
+    border-radius: 22px;
+    padding: 30px;
+    color: #ffffff;
+    border: 1px solid rgba(0, 255, 200, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 255, 200, 0.08);
+    transition: all 0.4s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    transform: translateY(-12px);
+    box-shadow: 0 20px 60px rgba(0, 255, 200, 0.25);
 }
+
+.card::before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(0,255,200,0.05), transparent 70%);
+    z-index: -1;
+    top: -10%;
+    left: -10%;
+}
+
 
 /* Buttons */
 .btn-primary {
-    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    background: linear-gradient(90deg, #00f5a0, #00d9f5);
     border: none;
     border-radius: 50px;
-    padding: 10px 25px;
+    padding: 12px 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    transform: scale(1.07);
+    box-shadow: 0 10px 25px rgba(0, 217, 245, 0.5);
 }
 
 .btn-success {
     background: linear-gradient(45deg, #11998e, #38ef7d);
     border: none;
     border-radius: 50px;
-}
-
-.btn:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
 }
 
 /* Navbar */
@@ -54,14 +70,40 @@ h1, h2, h3, h4 {
 
 /* Form styling */
 .form-control {
-    background: rgba(255,255,255,0.1);
-    border: none;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 12px;
-    color: white;
+    color: #ffffff;
 }
 
 .form-control:focus {
     background: rgba(255,255,255,0.15);
-    color: white;
-    box-shadow: none;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(0,255,200,0.3);
+}
+
+/* Fix dropdown options visibility */
+select.form-control option {
+    background: #0f2027;
+    color: #ffffff;
+}
+
+.card h3,
+.card p {
+    color: white !important;
+}
+.container {
+    position: relative;
+    z-index: 10;
+}
+.row {
+    margin-top: 60px;
+}
+
+h2 {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+input[type="radio"] {
+    accent-color: #00f5a0;
 }

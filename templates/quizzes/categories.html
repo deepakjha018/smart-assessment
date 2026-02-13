@@ -1,20 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2 class="text-center mb-5">Choose Your Domain</h2>
+
+<h2 class="text-center mb-5 text-white">
+    Choose Your Domain
+</h2>
 
 <div class="row">
     {% for category in categories %}
     <div class="col-md-4">
-        <div class="card p-4 text-center mb-4">
-            <h3>{{ category.name }}</h3>
-            <p class="text-light">{{ category.description }}</p>
+        <div class="card text-center mb-4">
+
+            <h3>
+                {% if category.name == "Academic" %}
+                    📚 {{ category.name }}
+                {% elif category.name == "Entertainment" %}
+                    🎬 {{ category.name }}
+                {% elif category.name == "General Knowledge" %}
+                    🌍 {{ category.name }}
+                {% else %}
+                    {{ category.name }}
+                {% endif %}
+            </h3>
+
+            <p class="text-light">
+                {{ category.description }}
+            </p>
 
             <a href="/categories/{{ category.id }}/"
                class="btn btn-primary mt-3">
                Explore →
             </a>
+
         </div>
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}
