@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from .models import Category
 from django.shortcuts import render, redirect
 from .models import SubCategory
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def quiz_settings(request, subcategory_id):
     subcategory = SubCategory.objects.get(id=subcategory_id)
 
@@ -22,12 +24,12 @@ def quiz_settings(request, subcategory_id):
     )
 
 
-
+@login_required
 def category_list(request):
     categories = Category.objects.all()
     return render(request, 'quizzes/categories.html', {'categories': categories})
 
-
+@login_required
 def subcategory_list(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     subcategories = category.subcategories.all()

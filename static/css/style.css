@@ -107,3 +107,88 @@ h2 {
 input[type="radio"] {
     accent-color: #00f5a0;
 }
+
+/* ===== AUTH PAGES ===== */
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+}
+
+.auth-card {
+    width: 420px;
+    padding: 40px;
+    border-radius: 25px;
+    background: linear-gradient(145deg, #16222a, #0f2027);
+    box-shadow: 0 20px 60px rgba(0,255,200,0.15);
+    border: 1px solid rgba(0,255,200,0.08);
+    transition: 0.4s ease;
+}
+
+.auth-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 80px rgba(0,255,200,0.25);
+}
+
+.auth-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #d1d5db;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    transition: 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #00f5a0;
+    box-shadow: 0 0 10px rgba(0,255,200,0.4);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(90deg, #00f5a0, #00d9f5);
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.3s ease;
+}
+
+.auth-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,217,245,0.5);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.auth-footer a {
+    color: #00f5a0;
+    text-decoration: none;
+}
