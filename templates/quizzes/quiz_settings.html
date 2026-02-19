@@ -31,10 +31,22 @@
                 </div>
 
                 <div class="mb-3">
-                    <input type="checkbox" name="timer" value="on"> Enable Timer
+                    <label class="form-label">Quiz Duration</label>
+                    <select class="form-control" name="timer_duration">
+                    <option value="0">No Timer</option>
+                    <option value="60">1 Minute</option>
+                    <option value="120">2 Minutes</option>
+                    <option value="300">5 Minutes</option>
+                    <option value="600">10 Minutes</option>
+                    </select>
                 </div>
 
-                <button class="btn btn-success w-100">Start Quiz</button>
+
+                <button type="submit" class="btn btn-success w-100">
+                    Save Settings
+                </button>
+
+
             </form>
         </div>
     </div>

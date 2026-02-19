@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Quiz Result{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <div class="card shadow-lg p-4 text-center mb-4">
+
+        <h2 class="mb-3">🎉 Quiz Completed</h2>
+
+        <h4 class="mb-3">
+            Score:
+            <span class="badge bg-primary">
+                {{ score }} / {{ total }}
+            </span>
+        </h4>
+
+        <h5 class="mb-3">
+            Percentage:
+            <span class="badge bg-info">
+                {{ percentage }}%
+            </span>
+        </h5>
+
+        <h5>
+            <span class="badge bg-{{ performance_class }}">
+                {{ performance }}
+            </span>
+        </h5>
+
+        <h5 class="mt-2">
+            ⏱ Time Taken: {{ time_taken }} seconds
+        </h5>
+
+    </div>
+
+
+    {% for item in results %}
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <h5 class="mb-3">
+                Q{{ forloop.counter }}. {{ item.question.question_text }}
+            </h5>
+
+            <p>
+                <strong>Your Answer:</strong>
+                {% if item.is_correct %}
+                    <span class="badge bg-success">{{ item.user_answer }}</span>
+                {% else %}
+                    <span class="badge bg-danger">{{ item.user_answer }}</span>
+                {% endif %}
+            </p>
+
+            {% if not item.is_correct %}
+                <p>
+                    <strong>Correct Answer:</strong>
+                    <span class="badge bg-success">
+                        {{ item.correct_answer }}
+                    </span>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="text-center mt-4">
+        <a href="{% url 'categories' %}" class="btn btn-primary px-4">
+            Back to Categories
+        </a>
+    </div>
+
+</div>
+{% endblock %}

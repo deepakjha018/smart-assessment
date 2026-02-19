@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h3>Generating your quiz...</h3>
+    <div class="spinner-border text-primary mt-3"></div>
+</div>
+
+<script>
+    setTimeout(function(){
+        window.location.href = "{% url 'generate_quiz' %}";
+    }, 2000);
+</script>
+
+{% endblock %}

@@ -12,4 +12,23 @@
 </ul>
 
 <p>This data is stored in session and will be used to generate quiz questions.</p>
+
+<a href="{% url 'generate_quiz' %}" 
+   class="btn btn-primary mt-3"
+   onclick="showLoader()">
+    Start Quiz
+</a>
+
+<div id="loader" style="display:none;" class="text-center mt-4">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Generating your quiz... Please wait</p>
+</div>
+
+<script>
+function showLoader() {
+    document.getElementById("loader").style.display = "block";
+}
+</script>
+
+
 {% endblock %}

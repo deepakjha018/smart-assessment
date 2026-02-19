@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if timer_duration > 0 %}
+    <div class="card shadow-sm p-3 mb-3 text-center border-danger">
+        <h5 class="text-danger">
+            ⏳ Time Remaining:
+            <span id="countdown" class="fw-bold"></span>
+        </h5>
+    </div>
+
+    <script>
+    let totalTime = {{ timer_duration }};
+    let timeLeft = totalTime;
+
+    function formatTime(seconds) {
+        let minutes = Math.floor(seconds / 60);
+        let secs = seconds % 60;
+        return minutes + ":" + (secs < 10 ? "0" : "") + secs;
+    }
+
+    const countdownElement = document.getElementById("countdown");
+    countdownElement.innerText = formatTime(timeLeft);
+
+    const timer = setInterval(function() {
+        timeLeft--;
+        countdownElement.innerText = formatTime(timeLeft);
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            window.location.href = "{% url 'submit_quiz' %}";
+        }
+    }, 1000);
+    </script>
+    {% endif %}
+
+
+<div class="container mt-4">
+
+    <h4>Topic: {{ quiz.topic }} | Difficulty: {{ quiz.difficulty }}</h4>
+
+    <div class="progress mt-3">
+        <div class="progress-bar bg-info"
+             role="progressbar"
+             style="width: {% widthratio question_number total 100 %}%;">
+            Question {{ question_number }} of {{ total }}
+        </div>
+    </div>
+
+    <div class="card mt-4 shadow">
+        <div class="card-body">
+            <h5>{{ question.question_text }}</h5>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="radio" name="option" value="A"
+                    {% if selected_answer == "A" %}checked{% endif %}>
+                    <label class="form-check-label">A. {{ question.option_a }}</label>
+                </div>
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="radio" name="option" value="B"
+                    {% if selected_answer == "B" %}checked{% endif %}>
+                    <label class="form-check-label">B. {{ question.option_b }}</label>
+                </div>
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="radio" name="option" value="C"
+                    {% if selected_answer == "C" %}checked{% endif %}>
+                    <label class="form-check-label">C. {{ question.option_c }}</label>
+                </div>
+
+                <div class="form-check mt-2">
+                    <input class="form-check-input" type="radio" name="option" value="D"
+                    {% if selected_answer == "D" %}checked{% endif %}>
+                    <label class="form-check-label">D. {{ question.option_d }}</label>
+                </div>
+
+                <div class="mt-4 d-flex justify-content-between">
+                    {% if question_number > 1 %}
+                        <button type="submit" name="previous" class="btn btn-secondary">
+                            Previous
+                        </button>
+                    {% endif %}
+
+                    {% if question_number < total %}
+                        <button type="submit" name="next" class="btn btn-primary">
+                            Next
+                        </button>
+                    {% else %}
+                        <button type="submit" name="submit" class="btn btn-success">
+                            Submit Quiz
+                        </button>
+                    {% endif %}
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
