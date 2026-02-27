@@ -52,3 +52,37 @@ def generate_quiz_questions(topic, difficulty, num_questions):
     except Exception as e:
         print("GROQ ERROR:", e)
         return None
+
+def generate_explanation(question_text, correct_option, options_dict):
+    try:
+        client = Groq(api_key=settings.GROQ_API_KEY)
+
+        correct_answer_text = options_dict.get(correct_option)
+
+        prompt = f"""
+        Explain why the following answer is correct.
+
+        Question: {question_text}
+
+        Correct Answer: {correct_answer_text}
+
+        Give a clear and educational explanation in 4-5 lines.
+        Do NOT return JSON.
+        Do NOT use markdown.
+        """
+
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[
+                {"role": "system", "content": "You are a helpful educational assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.5
+        )
+
+        explanation = response.choices[0].message.content.strip()
+        return explanation
+
+    except Exception as e:
+        print("GROQ EXPLANATION ERROR:", e)
+        return "Explanation could not be generated at this time."

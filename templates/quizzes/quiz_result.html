@@ -58,6 +58,11 @@
                         {{ item.correct_answer }}
                     </span>
                 </p>
+
+                <div class="mt-3 p-3 rounded explanation-box">
+                    <strong>Explanation:</strong>
+                    <p>{{ item.question.explanation }}</p>
+                </div>
             {% endif %}
         </div>
     </div>

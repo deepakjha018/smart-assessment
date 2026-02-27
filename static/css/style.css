@@ -192,3 +192,12 @@ input[type="radio"] {
     color: #00f5a0;
     text-decoration: none;
 }
+.explanation-box {
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #00ffcc;
+    color: #ffffff;
+}
+
+.explanation-box strong {
+    color: #00ffcc;
+}

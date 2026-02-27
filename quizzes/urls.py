@@ -10,5 +10,5 @@ urlpatterns = [
     path('generate/', views.generate_quiz, name='generate_quiz'),
     path('quiz/<int:question_number>/', views.quiz_page, name='quiz_page'),
     path('submit/', views.submit_quiz, name='submit_quiz'),
-
+    path('history/', views.quiz_history, name='quiz_history'),
 ]

@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% block title %}Quiz History{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <!-- Stats Cards -->
+    <div class="row mb-5">
+
+        <div class="col-md-6">
+            <div class="card text-center p-4">
+                <h5>Total Quizzes</h5>
+                <h2 class="text-info">{{ total_quizzes }}</h2>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card text-center p-4">
+                <h5>Average Score</h5>
+                <h2 class="text-success">{{ avg_score }}%</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Performance Chart -->
+    <div class="card p-4 mb-5">
+        <h5 class="mb-3">📈 Performance Over Time</h5>
+
+        <div style="height:350px;">
+            <canvas id="performanceChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Attempts Table -->
+    <div class="card p-4">
+        <h5 class="mb-4">📊 Previous Attempts</h5>
+
+        {% if quizzes %}
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Difficulty</th>
+                        <th>Score</th>
+                        <th>Percentage</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quiz in quizzes %}
+                    <tr>
+                        <td>{{ quiz.topic }}</td>
+                        <td>{{ quiz.difficulty }}</td>
+                        <td>{{ quiz.score }} / {{ quiz.total_questions }}</td>
+                        <td>
+                            <span class="badge 
+                            {% if quiz.percentage >= 80 %}
+                                bg-success
+                            {% elif quiz.percentage >= 50 %}
+                                bg-warning text-dark
+                            {% else %}
+                                bg-danger
+                            {% endif %}
+                            ">
+                                {{ quiz.percentage }}%
+                            </span>
+                        </td>
+                        <td>{{ quiz.time_taken }} sec</td>
+                        <td>{{ quiz.created_at|date:"M d, Y H:i" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <div class="alert alert-info text-center">
+                No completed quizzes yet.
+            </div>
+        {% endif %}
+    </div>
+
+</div>
+{{ chart_labels|json_script:"chart-labels" }}
+{{ chart_scores|json_script:"chart-scores" }}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const labels = JSON.parse(document.getElementById('chart-labels').textContent);
+    const scores = JSON.parse(document.getElementById('chart-scores').textContent);
+
+    if (!labels.length || !scores.length) {
+        console.log("No chart data available");
+        return;
+    }
+
+    const ctx = document.getElementById('performanceChart');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Score Percentage',
+                data: scores,
+                borderColor: '#00ffcc',
+                backgroundColor: 'rgba(0,255,204,0.25)',
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#00ffcc',
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        color: '#ffffff'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: '#ffffff'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#ffffff'
+                    }
+                }
+            }
+        }
+    });
+
+});
+</script>
+
+{% endblock %}

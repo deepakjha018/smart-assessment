@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from .models import UserAnswer
 from django.http import HttpResponse
 import time
+from .utils import generate_explanation
 
 @login_required
 def generate_quiz(request):
@@ -189,6 +190,24 @@ def submit_quiz(request):
         correct_answer = question.correct_answer
 
         is_correct = user_answer == correct_answer
+# 🔥 Generate explanation only if wrong and not already saved
+        if not is_correct and not question.explanation:
+            options_dict = {
+                "A": question.option_a,
+                "B": question.option_b,
+                "C": question.option_c,
+                "D": question.option_d,
+            }
+
+            explanation = generate_explanation(
+                question.question_text,
+                question.correct_answer,
+                options_dict
+            )
+
+            question.explanation = explanation
+            question.save()
+
         if is_correct:
             score += 1
 
@@ -223,7 +242,37 @@ def submit_quiz(request):
         "time_taken": time_taken,
         "performance_class": performance_class,
     }
+    quiz.score = score
+    quiz.percentage = percentage
+    quiz.time_taken = time_taken
+    quiz.save()
+
     if 'quiz_id' in request.session:
         del request.session['quiz_id']
 
     return render(request, "quizzes/quiz_result.html", context)
+
+from django.db.models import Avg
+
+@login_required
+def quiz_history(request):
+
+    quizzes = Quiz.objects.filter(
+        user=request.user,
+        score__isnull=False
+    ).order_by('-created_at')
+
+    total_quizzes = quizzes.count()
+    avg_score = quizzes.aggregate(Avg('percentage'))['percentage__avg'] or 0
+    avg_score = round(avg_score, 2)
+
+    labels = [f"Attempt {i+1}" for i in range(quizzes.count())]
+    scores = [quiz.percentage for quiz in quizzes]
+
+    return render(request, "quizzes/quiz_history.html", {
+        "quizzes": quizzes,
+        "total_quizzes": total_quizzes,
+        "avg_score": avg_score,
+        "chart_labels": labels,
+        "chart_scores": scores,
+    })

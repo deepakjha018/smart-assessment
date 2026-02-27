@@ -7,7 +7,9 @@ class Quiz(models.Model):
     difficulty = models.CharField(max_length=50)
     total_questions = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-
+    score = models.IntegerField(null=True, blank=True)
+    percentage = models.FloatField(null=True, blank=True)
+    time_taken = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return f"{self.user.username} - {self.topic}"
 
@@ -20,7 +22,8 @@ class Question(models.Model):
     option_c = models.CharField(max_length=300)
     option_d = models.CharField(max_length=300)
     correct_answer = models.CharField(max_length=1)
-
+    explanation = models.TextField(null=True, blank=True)
+    
     def __str__(self):
         return self.question_text
 
