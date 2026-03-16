@@ -38,32 +38,42 @@
     {% for item in results %}
     <div class="card mb-3 shadow-sm">
         <div class="card-body">
+
             <h5 class="mb-3">
                 Q{{ forloop.counter }}. {{ item.question.question_text }}
             </h5>
 
+            <!-- USER ANSWER -->
             <p>
                 <strong>Your Answer:</strong>
+
                 {% if item.is_correct %}
-                    <span class="badge bg-success">{{ item.user_answer }}</span>
+                    <span class="badge bg-success">
+                        ✔ {{ item.user_answer }} — {{ item.user_answer_text }}
+                    </span>
                 {% else %}
-                    <span class="badge bg-danger">{{ item.user_answer }}</span>
+                    <span class="badge bg-danger">
+                        ✖ {{ item.user_answer }} — {{ item.user_answer_text }}
+                    </span>
                 {% endif %}
             </p>
 
+            <!-- CORRECT ANSWER -->
             {% if not item.is_correct %}
-                <p>
-                    <strong>Correct Answer:</strong>
-                    <span class="badge bg-success">
-                        {{ item.correct_answer }}
-                    </span>
-                </p>
+            <p>
+                <strong>Correct Answer:</strong>
+                <span class="badge bg-success">
+                    {{ item.correct_answer }} — {{ item.correct_answer_text }}
+                </span>
+            </p>
 
-                <div class="mt-3 p-3 rounded explanation-box">
-                    <strong>Explanation:</strong>
-                    <p>{{ item.question.explanation }}</p>
-                </div>
+            <!-- EXPLANATION -->
+            <div class="mt-3 p-3 rounded explanation-box">
+                <strong>Explanation:</strong>
+                <p>{{ item.question.explanation }}</p>
+            </div>
             {% endif %}
+
         </div>
     </div>
     {% endfor %}

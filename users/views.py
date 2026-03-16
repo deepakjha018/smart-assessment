@@ -18,7 +18,8 @@ def register(request):
                 password=form.cleaned_data['password']
             )
             messages.success(request, "Account created successfully. Please login.")
-            return redirect('login')
+            login(request, user)
+            return redirect('home')
 
     return render(request, 'users/register.html', {'form': form})
 

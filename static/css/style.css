@@ -201,3 +201,16 @@ input[type="radio"] {
 .explanation-box strong {
     color: #00ffcc;
 }
+
+/* Pie Chart Size Fix */
+
+.pie-chart-wrapper {
+    width: 420px;
+    height: 320px;
+    margin: 0 auto;
+}
+
+#categoryChart {
+    width: 100% !important;
+    height: 100% !important;
+}

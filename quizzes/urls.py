@@ -11,4 +11,8 @@ urlpatterns = [
     path('quiz/<int:question_number>/', views.quiz_page, name='quiz_page'),
     path('submit/', views.submit_quiz, name='submit_quiz'),
     path('history/', views.quiz_history, name='quiz_history'),
+    path("resume/<int:quiz_id>/", views.resume_quiz, name="resume_quiz"),
+    path("abandon/<int:quiz_id>/", views.abandon_quiz, name="abandon_quiz"),
+    path('retake-quiz/<int:quiz_id>/', views.retake_quiz, name='retake_quiz'),
+
 ]

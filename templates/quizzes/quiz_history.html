@@ -2,35 +2,59 @@
 {% block title %}Quiz History{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
+    <div class="card p-4 mb-4">
 
-    <!-- Stats Cards -->
-    <div class="row mb-5">
+    <form method="GET" class="row g-3">
 
-        <div class="col-md-6">
-            <div class="card text-center p-4">
-                <h5>Total Quizzes</h5>
-                <h2 class="text-info">{{ total_quizzes }}</h2>
-            </div>
-        </div>
+    <div class="col-md-4">
+    <input type="text" name="search"
+    class="form-control"
+    placeholder="Search topic..."
+    value="{{ request.GET.search }}">
+    </div>
 
-        <div class="col-md-6">
-            <div class="card text-center p-4">
-                <h5>Average Score</h5>
-                <h2 class="text-success">{{ avg_score }}%</h2>
-            </div>
-        </div>
+    <div class="col-md-3">
+    <select name="topic" class="form-select">
+    <option value="">All Topics</option>
+    {% for topic in topics %}
+    <option value="{{ topic }}"
+    {% if request.GET.topic == topic %}selected{% endif %}>
+    {{ topic }}
+    </option>
+    {% endfor %}
+    </select>
+    </div>
+
+    <div class="col-md-3">
+    <select name="difficulty" class="form-select">
+    <option value="">All Difficulty</option>
+
+    <option value="Easy"
+    {% if request.GET.difficulty == "Easy" %}selected{% endif %}>
+    Easy
+    </option>
+
+    <option value="Medium"
+    {% if request.GET.difficulty == "Medium" %}selected{% endif %}>
+    Medium
+    </option>
+
+    <option value="Hard"
+    {% if request.GET.difficulty == "Hard" %}selected{% endif %}>
+    Hard
+    </option>
+    </select>
+    </div>
+
+    <div class="col-md-2">
+    <button class="btn btn-info w-100">Filter</button>
+    </div>
+
+    </form>
 
     </div>
 
-    <!-- Performance Chart -->
-    <div class="card p-4 mb-5">
-        <h5 class="mb-3">📈 Performance Over Time</h5>
-
-        <div style="height:350px;">
-            <canvas id="performanceChart"></canvas>
-        </div>
-    </div>
+    
 
     <!-- Attempts Table -->
     <div class="card p-4">
@@ -70,6 +94,12 @@
                         </td>
                         <td>{{ quiz.time_taken }} sec</td>
                         <td>{{ quiz.created_at|date:"M d, Y H:i" }}</td>
+                        <td>
+                            <a href="{% url 'retake_quiz' quiz.id %}" class="btn btn-sm btn-warning">
+                                🔁 Retake
+                            </a>
+                        </td>
+
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -83,6 +113,39 @@
     </div>
 
 </div>
+
+<div class="mt-4 d-flex justify-content-center">
+
+<nav>
+<ul class="pagination">
+
+{% if quizzes.has_previous %}
+<li class="page-item">
+<a class="page-link"
+href="?page={{ quizzes.previous_page_number }}&search={{ request.GET.search }}&topic={{ request.GET.topic }}&difficulty={{ request.GET.difficulty }}">
+Previous
+</a>
+{% endif %}
+
+<li class="page-item active">
+<span class="page-link">
+Page {{ quizzes.number }} of {{ quizzes.paginator.num_pages }}
+</span>
+</li>
+
+{% if quizzes.has_next %}
+<li class="page-item">
+<a class="page-link"
+href="?page={{ quizzes.next_page_number }}&search={{ request.GET.search }}&topic={{ request.GET.topic }}&difficulty={{ request.GET.difficulty }}">
+Next
+</a>
+{% endif %}
+
+</ul>
+</nav>
+
+</div>
+
 {{ chart_labels|json_script:"chart-labels" }}
 {{ chart_scores|json_script:"chart-scores" }}
 

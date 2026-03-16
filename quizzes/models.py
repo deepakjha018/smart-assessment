@@ -10,6 +10,10 @@ class Quiz(models.Model):
     score = models.IntegerField(null=True, blank=True)
     percentage = models.FloatField(null=True, blank=True)
     time_taken = models.IntegerField(null=True, blank=True)
+    status = models.CharField(
+    max_length=20,
+    default="in_progress"
+    )
     def __str__(self):
         return f"{self.user.username} - {self.topic}"
 

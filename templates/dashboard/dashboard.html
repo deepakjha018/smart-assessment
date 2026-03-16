@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Dashboard</h2>
+
+<div class="row">
+
+<div class="col-md-4">
+<div class="card text-center">
+<h5>📊 Total Quizzes</h5>
+<h2>{{ total_quizzes }}</h2>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card text-center">
+<h5>📈 Average Score</h5>
+<h2>{{ avg_score }}%</h2>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card text-center">
+<h5>🏆 Best Score</h5>
+<h2>{{ best_score }}%</h2>
+</div>
+</div>
+
+</div>
+
+<br>
+
+<div class="card">
+<h4>Performance Over Time</h4>
+<canvas id="performanceChart" height="220"></canvas>
+</div>
+
+<br>
+
+<!-- Incomplete Quizzes -->
+<div class="card mt-4">
+    <h5>Incomplete Quizzes</h5>
+
+    {% for quiz in incomplete_quizzes %}
+    <div class="quiz-item">
+
+        <b>{{ quiz.topic }}</b>
+        <span>{{ quiz.difficulty }}</span>
+
+        <a href="{% url 'resume_quiz' quiz.id %}" class="btn btn-success btn-sm">
+            Resume
+        </a>
+
+        <a href="{% url 'abandon_quiz' quiz.id %}" class="btn btn-danger btn-sm">
+            Abandon
+        </a>
+
+    </div>
+    {% empty %}
+        <p>No incomplete quizzes.</p>
+    {% endfor %}
+
+</div>
+
+<br>
+
+<div class="card">
+<h4>Category Distribution</h4>
+<div class="pie-chart-wrapper">
+    <canvas id="categoryChart"></canvas>
+</div>
+</div>
+
+<br>
+
+<div class="card">
+<h4>Recent Attempts</h4>
+
+<table class="table table-dark">
+<tr>
+<th>Topic</th>
+<th>Difficulty</th>
+<th>Score</th>
+<th>Percentage</th>
+<th>Date</th>
+</tr>
+
+{% for quiz in recent_quizzes %}
+<tr>
+<td>{{ quiz.topic }}</td>
+<td>{{ quiz.difficulty }}</td>
+<td>{{ quiz.score }}/{{ quiz.total_questions }}</td>
+<td>{{ quiz.percentage }}%</td>
+<td>{{ quiz.created_at }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+
+const labels = JSON.parse('{{ chart_labels|escapejs }}');
+const scores = JSON.parse('{{ chart_scores|escapejs }}');
+
+const categoryLabels = JSON.parse('{{ category_labels|escapejs }}');
+const categoryCounts = JSON.parse('{{ category_counts|escapejs }}');
+
+
+// Performance Chart
+const ctx1 = document.getElementById("performanceChart");
+
+if(ctx1){
+new Chart(ctx1, {
+type: "line",
+data: {
+labels: labels,
+datasets: [{
+label: "Score %",
+data: scores,
+borderColor: "#00ffd0",
+backgroundColor: "rgba(0,255,208,0.15)",
+borderWidth: 3,
+pointBackgroundColor: "#00ffd0",
+tension: 0.4,
+fill: true
+}]
+},
+options: {
+plugins: {
+legend: {
+labels: {
+color: "#ffffff"
+}
+}
+},
+scales: {
+x: {
+ticks: { color: "#ffffff" },
+grid: { color: "rgba(255,255,255,0.05)" }
+},
+y: {
+ticks: { color: "#ffffff" },
+grid: { color: "rgba(255,255,255,0.05)" }
+}
+}
+}
+});
+}
+
+
+// Category Pie Chart
+const ctx2 = document.getElementById("categoryChart");
+
+if(ctx2){
+new Chart(ctx2, {
+type: "pie",
+data: {
+labels: categoryLabels,
+datasets: [{
+data: categoryCounts,
+backgroundColor: [
+"#00ffd0",
+"#36a2eb",
+"#ff6384",
+"#ffce56",
+"#8e44ad",
+"#2ecc71"
+],
+borderWidth: 2,
+borderColor: "#0f2027"
+}]
+},
+options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            position: "bottom",
+            labels: {
+                color: "#ffffff",
+                padding: 15
+            }
+        }
+    }
+}
+});
+}
+
+});
+
+</script>
+
+{% endblock %}
