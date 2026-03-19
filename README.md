@@ -2,6 +2,8 @@
 
 A full-stack Django web application that dynamically generates quizzes using AI (Groq + LLaMA 3), supports timed assessments, automatic evaluation, and detailed performance analytics.
 
+Link:- https://smart-assessment.onrender.com/
+
 ---
 
 ## 🚀 Features
