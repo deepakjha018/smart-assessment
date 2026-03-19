@@ -122,5 +122,19 @@ document.querySelectorAll('.progress-circle').forEach(circle => {
     circle.style.setProperty('--percentage', percentage);
 });
 </script>
+<script>
+function toggleEdit() {
+    let view = document.getElementById("profileView");
+    let edit = document.getElementById("profileEdit");
+
+    if (view.style.display === "none") {
+        view.style.display = "block";
+        edit.style.display = "none";
+    } else {
+        view.style.display = "none";
+        edit.style.display = "block";
+    }
+}
+</script>
 </body>
 </html>
