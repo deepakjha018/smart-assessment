@@ -106,9 +106,10 @@ def quiz_page(request, question_number):
     except:
         selected_answer = None
 
-    timer_enabled = request.session.get('timer') == 'on'
+    
     timer_duration = request.session.get('timer_duration', 0)
-
+    timer_enabled = timer_duration > 0
+    
     context = {
         "quiz": quiz,
         "question": question,
@@ -160,12 +161,26 @@ def subcategory_list(request, category_id):
     )
 
 def quiz_summary(request):
+    timer = request.session.get('timer_duration', 0)
+
+    # Convert to user-friendly text
+    timer_map = {
+        0: "No Timer",
+        60: "1 Minute",
+        120: "2 Minutes",
+        300: "5 Minutes",
+        600: "10 Minutes"
+    }
+
+    timer_display = timer_map.get(timer, "No Timer")
+
     context = {
         'subcategory_id': request.session.get('subcategory_id'),
         'difficulty': request.session.get('difficulty'),
         'question_count': request.session.get('question_count'),
-        'timer': request.session.get('timer'),
+        'timer': timer_display,
     }
+
     return render(request, 'quizzes/quiz_summary.html', context)
 
 @login_required

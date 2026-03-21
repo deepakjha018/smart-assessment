@@ -4,85 +4,104 @@
 {% block content %}
 <div class="container mt-5">
 
-    <div class="card shadow-lg p-4 text-center mb-4">
+    <!-- ===== RESULT HEADER ===== -->
+    <div class="card premium-result mb-4 text-center">
 
         <h2 class="mb-3">🎉 Quiz Completed</h2>
 
-        <h4 class="mb-3">
-            Score:
-            <span class="badge bg-primary">
-                {{ score }} / {{ total }}
-            </span>
-        </h4>
+        <!-- Score Circle -->
+        <div class="score-circle">
+            <span>{{ percentage }}%</span>
+        </div>
 
-        <h5 class="mb-3">
-            Percentage:
-            <span class="badge bg-info">
-                {{ percentage }}%
-            </span>
-        </h5>
+        <!-- Stats -->
+        <div class="result-stats mt-4">
 
-        <h5>
-            <span class="badge bg-{{ performance_class }}">
-                {{ performance }}
-            </span>
-        </h5>
+            <div class="result-box">
+                <p>Score</p>
+                <h4>{{ score }}/{{ total }}</h4>
+            </div>
 
-        <h5 class="mt-2">
-            ⏱ Time Taken: {{ time_taken }} seconds
-        </h5>
+            <div class="result-box">
+                <p>Time Taken</p>
+                <h4>{{ time_taken }}s</h4>
+            </div>
+
+            <div class="result-box">
+                <p>Performance</p>
+                <span class="badge bg-{{ performance_class }} px-3 py-2">
+                    {{ performance }}
+                </span>
+            </div>
+
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress mt-4">
+            <div class="progress-bar"
+                 style="width: {{ percentage }}%">
+            </div>
+        </div>
 
     </div>
 
 
+    <!-- ===== QUESTIONS ===== -->
     {% for item in results %}
-    <div class="card mb-3 shadow-sm">
-        <div class="card-body">
+    <div class="card result-card mb-3">
 
-            <h5 class="mb-3">
-                Q{{ forloop.counter }}. {{ item.question.question_text }}
-            </h5>
+        <h5>
+            <span class="badge bg-secondary">Q{{ forloop.counter }}</span>
+            {{ item.question.question_text }}
+        </h5>
 
-            <!-- USER ANSWER -->
-            <p>
-                <strong>Your Answer:</strong>
-
-                {% if item.is_correct %}
-                    <span class="badge bg-success">
-                        ✔ {{ item.user_answer }} — {{ item.user_answer_text }}
-                    </span>
-                {% else %}
-                    <span class="badge bg-danger">
-                        ✖ {{ item.user_answer }} — {{ item.user_answer_text }}
-                    </span>
-                {% endif %}
-            </p>
-
-            <!-- CORRECT ANSWER -->
-            {% if not item.is_correct %}
-            <p>
-                <strong>Correct Answer:</strong>
+        <!-- Your Answer -->
+        <p class="answer-row">
+            <strong>Your Answer:</strong>
+            {% if item.is_correct %}
                 <span class="badge bg-success">
-                    {{ item.correct_answer }} — {{ item.correct_answer_text }}
+                    ✔ {{ item.user_answer_text }}
                 </span>
-            </p>
-
-            <!-- EXPLANATION -->
-            <div class="mt-3 p-3 rounded explanation-box">
-                <strong>Explanation:</strong>
-                <p>{{ item.question.explanation }}</p>
-            </div>
+            {% else %}
+                <span class="badge bg-danger">
+                    ✖ {{ item.user_answer_text }}
+                </span>
             {% endif %}
+        </p>
 
+        <!-- Correct Answer -->
+        {% if not item.is_correct %}
+        <p class="answer-row">
+            <strong>Correct Answer:</strong>
+            <span class="badge bg-success">
+                {{ item.correct_answer_text }}
+            </span>
+        </p>
+
+        <!-- Explanation -->
+        <div class="explanation-box mt-3">
+            <strong>Explanation:</strong>
+            <p>{{ item.question.explanation }}</p>
         </div>
+        {% endif %}
+
     </div>
     {% endfor %}
 
+
+    <!-- Button -->
     <div class="text-center mt-4">
-        <a href="{% url 'categories' %}" class="btn btn-primary px-4">
+        <a href="{% url 'categories' %}" class="btn btn-primary px-4 py-2">
             Back to Categories
         </a>
     </div>
 
 </div>
+
+<script>
+document.querySelector('.score-circle').style.setProperty(
+    '--percent',
+    {{ percentage }}
+);
+</script>
 {% endblock %}

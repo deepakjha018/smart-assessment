@@ -2,26 +2,60 @@
 {% block title %}Quiz Summary{% endblock %}
 
 {% block content %}
-<h2>Quiz Configuration Summary</h2>
 
-<ul>
-    <li>Subcategory ID: {{ subcategory_id }}</li>
-    <li>Difficulty: {{ difficulty }}</li>
-    <li>Questions: {{ question_count }}</li>
-    <li>Timer: {{ timer }}</li>
-</ul>
+<div class="container mt-5">
 
-<p>This data is stored in session and will be used to generate quiz questions.</p>
+    <div class="summary-card mx-auto">
 
-<a href="{% url 'generate_quiz' %}" 
-   class="btn btn-primary mt-3"
-   onclick="showLoader()">
-    Start Quiz
-</a>
+        <h2 class="text-center mb-4">🧾 Quiz Summary</h2>
 
-<div id="loader" style="display:none;" class="text-center mt-4">
-    <div class="spinner-border text-primary" role="status"></div>
-    <p class="mt-2">Generating your quiz... Please wait</p>
+        <!-- Summary Grid -->
+        <div class="summary-grid">
+
+            <div class="summary-item">
+                <p>📚 Subcategory</p>
+                <h5>{{ subcategory_id }}</h5>
+            </div>
+
+            <div class="summary-item">
+                <p>🎯 Difficulty</p>
+                <h5>{{ difficulty }}</h5>
+            </div>
+
+            <div class="summary-item">
+                <p>❓ Questions</p>
+                <h5>{{ question_count }}</h5>
+            </div>
+
+            <div class="summary-item">
+                <p>⏱ Timer</p>
+                <h5>{{ timer }}</h5>
+            </div>
+
+        </div>
+
+        <!-- Info -->
+        <p class="summary-info">
+            This configuration will be used to generate your quiz.
+        </p>
+
+        <!-- Button -->
+        <div class="text-center mt-4">
+            <a href="{% url 'generate_quiz' %}" 
+               class="btn btn-primary px-4 py-2"
+               onclick="showLoader()">
+                🚀 Start Quiz
+            </a>
+        </div>
+
+        <!-- Loader -->
+        <div id="loader" class="summary-loader">
+            <div class="spinner-border text-primary"></div>
+            <p>Generating your quiz... Please wait</p>
+        </div>
+
+    </div>
+
 </div>
 
 <script>
@@ -29,6 +63,5 @@ function showLoader() {
     document.getElementById("loader").style.display = "block";
 }
 </script>
-
 
 {% endblock %}

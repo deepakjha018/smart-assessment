@@ -1,34 +1,102 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2 class="text-center mb-5 text-white">
-    Choose Your Domain
+<style>
+/* SECTION TITLE */
+.category-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #1e293b;
+}
+
+/* CARD GRID */
+.category-card {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* HOVER EFFECT */
+.category-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+    border-color: #3b82f6;
+}
+
+/* ICON */
+.category-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+/* TITLE */
+.category-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+/* DESCRIPTION */
+.category-card p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+/* BUTTON */
+.category-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform: scale(1.05);
+}
+</style>
+
+<h2 class="category-title">
+    ✨ Choose Your Domain
 </h2>
 
 <div class="row">
     {% for category in categories %}
-    <div class="col-md-4">
-        <div class="card text-center mb-4">
+    <div class="col-md-4 mb-4">
+        <div class="category-card">
 
-            <h3>
+            <div class="category-icon">
                 {% if category.name == "Academic" %}
-                    📚 {{ category.name }}
+                    📚
                 {% elif category.name == "Entertainment" %}
-                    🎬 {{ category.name }}
+                    🎬
                 {% elif category.name == "General Knowledge" %}
-                    🌍 {{ category.name }}
+                    🌍
                 {% else %}
-                    {{ category.name }}
+                    📌
                 {% endif %}
-            </h3>
+            </div>
 
-            <p class="text-light">
-                {{ category.description }}
-            </p>
+            <h3>{{ category.name }}</h3>
 
-            <a href="/categories/{{ category.id }}/"
-               class="btn btn-primary mt-3">
-               Explore →
+            <p>{{ category.description }}</p>
+
+            <a href="/categories/{{ category.id }}/" class="category-btn">
+                Explore →
             </a>
 
         </div>

@@ -2,23 +2,96 @@
 {% block title %}Subcategories{% endblock %}
 
 {% block content %}
-<h2 class="text-center mb-4">{{ category.name }}</h2>
+
+<style>
+/* TITLE */
+.sub-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 35px;
+    color: #1e293b;
+}
+
+/* CARD */
+.sub-card {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* HOVER */
+.sub-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.15);
+    border-color: #3b82f6;
+}
+
+/* TITLE */
+.sub-card h5 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* BUTTON */
+.sub-btn {
+    margin-top: 15px;
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.sub-btn:hover {
+    background: linear-gradient(135deg, #15803d, #166534);
+    transform: scale(1.05);
+}
+
+/* BACK BUTTON */
+.back-btn {
+    margin-top: 25px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #cbd5f5;
+}
+</style>
+
+<h2 class="sub-title">
+    📂 {{ category.name }}
+</h2>
 
 <div class="row">
     {% for sub in subcategories %}
-    <div class="col-md-4">
-        <div class="card shadow text-center p-3 mb-4">
+    <div class="col-md-4 mb-4">
+        <div class="sub-card">
             <h5>{{ sub.name }}</h5>
-            <a href="/quiz-settings/{{ sub.id }}/"
-               class="btn btn-success mt-3">
-                Start Quiz
+
+            <a href="/quiz-settings/{{ sub.id }}/" class="sub-btn">
+                🚀 Start Quiz
             </a>
         </div>
     </div>
     {% endfor %}
 </div>
 
-<div class="text-center mt-3">
-    <a href="/categories/" class="btn btn-secondary">← Back</a>
+<div class="text-center">
+    <a href="/categories/" class="back-btn">← Back</a>
 </div>
+
 {% endblock %}
