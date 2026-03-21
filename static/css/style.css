@@ -27,6 +27,7 @@ body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -1033,4 +1034,347 @@ img {
 .card form input,
 .card form select {
     border-radius: 10px;
+}
+
+/* ===============================
+   DARK THEME VARIABLES
+================================ */
+[data-theme="dark"] {
+    --bg: #0f172a;
+    --card-bg: #111827;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --border: #1f2937;
+
+    --primary: #22d3ee;
+    --primary-dark: #0891b2;
+
+    --success: #22c55e;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+}
+
+/* =========================================
+   PREMIUM DARK BACKGROUND
+========================================= */
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #e2e8f0;
+}
+
+/* DARK GLASS CARD */
+[data-theme="dark"] .card,
+[data-theme="dark"] .quiz-card,
+[data-theme="dark"] .profile-card,
+[data-theme="dark"] .summary-card {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(2, 6, 23, 0.85) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .nav-link {
+    color: #cbd5f5 !important;
+}
+
+[data-theme="dark"] .nav-link:hover {
+    color: #22d3ee !important;
+}
+
+[data-theme="dark"] .active-link {
+    background: #22d3ee;
+    color: #0f172a !important;
+}
+
+[data-theme="dark"] .btn,
+[data-theme="dark"] .auth-btn,
+[data-theme="dark"] .retake-btn {
+    background: linear-gradient(135deg, #22d3ee, #4ade80);
+    border: none;
+    color: #0f172a;
+    box-shadow: 0 0 15px rgba(34,211,238,0.5);
+}
+
+[data-theme="dark"] .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(34,211,238,0.8);
+}
+
+[data-theme="dark"] .quiz-timer {
+    background: rgba(15,23,42,0.7);
+    border: 1px solid #ef4444;
+    color: #f87171;
+}
+
+[data-theme="dark"] .option-card {
+    background: rgba(15,23,42,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .option-card:hover {
+    background: rgba(34,211,238,0.15);
+    border-color: #22d3ee;
+}
+
+[data-theme="dark"] .option-card:has(input:checked) {
+    background: rgba(34,211,238,0.25);
+    border-color: #22d3ee;
+}
+
+[data-theme="dark"] .table {
+    background: rgba(15,23,42,0.6);
+}
+
+[data-theme="dark"] .table thead {
+    background: rgba(255,255,255,0.05);
+}
+
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] footer {
+    color: #94a3b8;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* =========================================
+   FORCE DARK MODE FIX (GLOBAL)
+========================================= */
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .category-card,
+[data-theme="dark"] .sub-card,
+[data-theme="dark"] .result-box,
+[data-theme="dark"] .result-card,
+[data-theme="dark"] .podium-card,
+[data-theme="dark"] .profile-box,
+[data-theme="dark"] .summary-item,
+[data-theme="dark"] .quiz-item {
+    background: rgba(15, 23, 42, 0.65) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] label {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .category-card {
+    background: rgba(15, 23, 42, 0.6) !important;
+}
+
+[data-theme="dark"] .category-card h3 {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .category-card p {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .sub-card {
+    background: rgba(15, 23, 42, 0.6) !important;
+}
+
+[data-theme="dark"] .sub-card h5 {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .result-box {
+    background: rgba(15, 23, 42, 0.7) !important;
+}
+
+[data-theme="dark"] .score-circle {
+    color: #ffffff;
+}
+
+[data-theme="dark"] .podium-card {
+    background: rgba(15, 23, 42, 0.7) !important;
+}
+
+[data-theme="dark"] .highlight-user {
+    background: rgba(34,211,238,0.15) !important;
+}
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select {
+    background: rgba(15,23,42,0.7);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .lead {
+    color: #cbd5f5 !important;
+}
+
+[data-theme="dark"] .explanation-box {
+    background: rgba(15,23,42,0.8) !important;
+    border-left: 4px solid #22d3ee;
+    color: #cbd5f5 !important;
+}
+
+[data-theme="dark"] .table {
+    background: rgba(15,23,42,0.6) !important;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .table thead {
+    background: rgba(255,255,255,0.05) !important;
+}
+
+[data-theme="dark"] .table th {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .table td {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover {
+    background: rgba(34,211,238,0.08) !important;
+}
+
+[data-theme="dark"] .score-badge.high {
+    background: rgba(34,197,94,0.2);
+    color: #4ade80;
+}
+
+[data-theme="dark"] .score-badge.medium {
+    background: rgba(245,158,11,0.2);
+    color: #facc15;
+}
+
+[data-theme="dark"] .score-badge.low {
+    background: rgba(239,68,68,0.2);
+    color: #f87171;
+}
+
+[data-theme="dark"] .auth-card {
+    background: rgba(15,23,42,0.7) !important;
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .auth-title {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .auth-footer a {
+    color: #22d3ee;
+}
+
+[data-theme="dark"] .modern-table {
+    background: transparent;
+}
+
+[data-theme="dark"] .modern-table th {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .modern-table td {
+    color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .highlight-user {
+    background: rgba(34,211,238,0.12) !important;
+    border-left: 3px solid #22d3ee;
+}
+
+[data-theme="dark"] .page-link {
+    background: rgba(15,23,42,0.7);
+    color: #e2e8f0;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .page-item.active .page-link {
+    background: #22d3ee;
+    color: #0f172a;
+}
+
+/* ===============================
+   FINAL TABLE DARK FIX (CRITICAL)
+================================ */
+
+[data-theme="dark"] .table tbody tr {
+    background: rgba(15, 23, 42, 0.6) !important;
+}
+
+[data-theme="dark"] .table tbody tr:nth-child(even) {
+    background: rgba(15, 23, 42, 0.75) !important;
+}
+
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(odd),
+[data-theme="dark"] .table-striped > tbody > tr:nth-of-type(even) {
+    background-color: transparent !important;
+}
+
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th {
+    background: transparent !important;
+    color: #e2e8f0 !important;
+    border-color: rgba(255,255,255,0.08) !important;
+}
+
+[data-theme="dark"] .card .table {
+    background: transparent !important;
+}
+
+[data-theme="dark"] .table-hover tbody tr:hover {
+    background: rgba(34, 211, 238, 0.12) !important;
+    transform: scale(1.01);
+}
+
+/* Dark mode override for percentage badges */
+[data-theme="dark"] .score-badge {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .score-badge.high {
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+    color: #022c22;
+    box-shadow: 
+        0 0 10px rgba(34, 197, 94, 0.5),
+        0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+[data-theme="dark"] .score-badge.medium {
+    background: linear-gradient(90deg, #facc15, #f59e0b);
+    color: #3f2f00;
+    box-shadow: 
+        0 0 10px rgba(250, 204, 21, 0.5),
+        0 0 20px rgba(250, 204, 21, 0.3);
+}
+
+[data-theme="dark"] .score-badge.low {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+    color: #2b0202;
+    box-shadow: 
+        0 0 10px rgba(239, 68, 68, 0.5),
+        0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+[data-theme="dark"] .score-badge:hover {
+    transform: scale(1.08);
+    filter: brightness(1.1);
 }

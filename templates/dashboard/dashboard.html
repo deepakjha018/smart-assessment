@@ -152,7 +152,9 @@ options: {
 plugins: {
 legend: {
 labels: {
-color: "#1e293b"
+color: document.documentElement.getAttribute("data-theme") === "dark"
+    ? "#e2e8f0"
+    : "#1e293b"
 }
 }
 },
@@ -202,7 +204,9 @@ plugins: {
 legend: {
 position: "bottom",   // cleaner look
 labels: {
-color: "#1e293b",
+color: document.documentElement.getAttribute("data-theme") === "dark"
+    ? "#e2e8f0"
+    : "#1e293b",
 padding: 15,
 boxWidth: 12
 }
