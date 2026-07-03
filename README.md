@@ -116,10 +116,11 @@ This project was developed as part of **Infosys Springboard Virtual Internship 6
 ### Database
 - SQLite
 
+---
 
 # 📂 Project Architecture
 
-
+```
 Smart-Assessment/
 │
 ├── 📂 dashboard/                 # Dashboard application
@@ -197,6 +198,12 @@ Smart-Assessment/
 │
 └── .gitignore                    # Ignored files
 
+
+```
+
+
+
+--- 
 
 # ⚙️ Installation
 
